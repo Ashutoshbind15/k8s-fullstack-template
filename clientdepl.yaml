@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend 
+  namespace: project
+spec:
+  selector:
+    matchLabels:
+      app: hello
+      tier: frontend 
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: hello
+        tier: frontend 
+    spec:
+      containers:
+        - name: hello-fe
+          image: "ashutosh150903/projfrontend:1.0.3"
+          ports:
+            - name: hello-fe-port 
+              containerPort: 8080
+          env:
+            - name: VITE_SERVER_URI
+              value: "/api"
